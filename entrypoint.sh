@@ -68,51 +68,80 @@ rm -rf wwwroot.tar.gz
 
 cat <<-EOF > /v2raybin/config.json
 {
-    "log":{
-        "loglevel":"warning"
+    "log": {
+        "loglevel": "warning"
     },
-    "inbound":{
-        "protocol":"vmess",
-        "listen":"127.0.0.1",
-        "port":2333,
-        "settings":{
-            "clients":[
-                {
-                    "id":"${UUID}",
-                    "level":1,
-                    "alterId":${AlterID}
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "block"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 1234,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": ""
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "tlsSettings": {
+                    "certificates": [
+                        {
+                            "certificateFile": "/path/to/certificate.crt",
+                            "keyFile": "/path/to/key.key"
+                        }
+                    ]
                 }
-            ]
-        },
-        "streamSettings":{
-            "network":"ws",
-            "wsSettings":{
-                "path":"${V2_Path}"
             }
         }
-        "protocol":"vless",
-        "listen":"127.0.0.1",
-        "port":2333,
-        "settings":{
-            "clients":[
-                {
-                    "id":"${UUID}",
+    ],
+    
+    "port": 1234,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "",
+                        "level": 0,
+                        "email": "love@example.com"
                     }
                 ],
                 "decryption": "none"
-                    },
-        "streamSettings":{
-            "network":"ws",
-            "wsSettings":{
-                "path":"${V2_Path}"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": true,
+                    "path": "/websocket"
+                }
             }
         }
-    },
-    "outbound":{
-        "protocol":"freedom",
-        "settings":{
+	"outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
         }
-    }
+    ]
 }
 EOF
 
@@ -156,7 +185,7 @@ cat <<-EOF > /v2raybin/vless.json
     "port": "443",
     "id": "${UUID}",
     "decryption": "none"
-        "net": "ws",
+    "net": "ws",
     "type": "none",
     "host": "",
     "path": "${V2_Path}",

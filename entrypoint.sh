@@ -68,82 +68,36 @@ rm -rf wwwroot.tar.gz
 
 cat <<-EOF > /v2raybin/config.json
 {
-    "log": {
-        "loglevel": "warning"
+    "log":{
+        "loglevel":"warning"
     },
-    "routing": {
-        "domainStrategy": "AsIs",
-        "rules": [
-            {
-                "type": "field",
-                "ip": [
-                    "geoip:private"
-                ],
-                "outboundTag": "block"
-            }
-        ]
-    },
-    "inbounds": [
-        {
-            "listen": "0.0.0.0",
-            "port": 1234,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": ""
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "tls",
-                "tlsSettings": {
-                    "certificates": [
-                        {
-                            "certificateFile": "/path/to/certificate.crt",
-                            "keyFile": "/path/to/key.key"
-                        }
-                    ]
+    "inbound":{
+        "protocol":"vless",
+        "listen":"127.0.0.1",
+        "port":2333,
+        "settings":{
+            "clients":[
+                {
+                    "id":"${UUID}",
+                    "level":1,
+                    "alterId":${AlterID}
                 }
-            }
-        }
-    ],
-    
-    "port": 1234,
-            "listen": "127.0.0.1",
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "",
-                        "level": 0,
-                        "email": "love@example.com"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "acceptProxyProtocol": true,
-                    "path": "/websocket"
-                }
-            }
-        }
-	"outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
+            ]
         },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
+        "streamSettings":{
+            "network":"ws",
+            "wsSettings":{
+                "path":"${V2_Path}"
+            }
         }
-    ]
+    },
+    "outbound":{
+        "protocol":"freedom",
+        "settings":{
+        }
+    }
 }
-EOF
+EOF                          
 
 echo /v2raybin/config.json
 cat /v2raybin/config.json

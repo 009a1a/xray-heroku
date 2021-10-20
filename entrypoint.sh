@@ -30,27 +30,27 @@ ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
 date -R
 
 if [ "$VER" = "latest" ]; then
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-32.zip"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-32.zip"
 else
-  V_VER="v$VER"
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-32.zip"
+  X_VER="v$VER"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$V_VER/Xray-linux-32.zip"
 fi
 
 if [ "$VER" = "latest" ]; then
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
 else
-  V_VER="v$VER"
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-64.zip"
+  X_VER="v$VER"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$V_VER/Xray-linux-64.zip"
 fi
 
-V_VER="latest"
-mkdir /v2raybin
-cd /v2raybin
-echo ${V2RAY_URL}
-wget --no-check-certificate -qO 'v2ray.zip' ${V2RAY_URL}
-unzip v2ray.zip
-rm -rf v2ray.zip
-chmod +x v2ray
+X_VER="latest"
+mkdir /Xraybin
+cd /Xraybin
+echo ${XRAY_URL}
+wget --no-check-certificate -qO 'Xray.zip' ${XRAY_URL}
+unzip Xray.zip
+rm -rf Xray.zip
+chmod +x Xray
 
 C_VER="v1.0.4"
 mkdir /caddybin
@@ -66,41 +66,73 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
-cat <<-EOF > /v2raybin/config.json
+cat <<-EOF > /Xraybin/config.json
 {
     "log":{
         "loglevel":"warning"
     },
-    "inbound":{
-        "protocol":"vless",
-        "listen":"127.0.0.1",
-        "port":2333,
-        "settings":{
-            "clients":[
-                {
-                    "id":"${UUID}",
-                    "level":1,
-                    "alterId":${AlterID}
+"inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 12346,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "${Vless_UUID}"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": false,
+                    "path": "${Vless_Path}"
                 }
-            ]
+            }
         },
-        "streamSettings":{
-            "network":"ws",
-            "wsSettings":{
-                "path":"${V2_Path}"
+        {
+            "listen": "0.0.0.0",
+            "port": 12346,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                    "id": "${Vmess_UUID}",
+                    "level": 0,
+                    "alterId": 0,
+                    "email": "love@xray.com"
+                    }
+                ],
+                "disableInsecureEncryption": false
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": false,
+                    "path": "${Vmess_Path}"
+                }
             }
         }
-    },
-    "outbound":{
-        "protocol":"freedom",
-        "settings":{
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
         }
-    }
+    ]
 }
 EOF                          
 
-echo /v2raybin/config.json
-cat /v2raybin/config.json
+echo /Xraybin/config.json
+cat /Xraybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
 http://0.0.0.0:${PORT}
@@ -108,14 +140,14 @@ http://0.0.0.0:${PORT}
 	root /wwwroot
 	index index.html
 	timeouts none
-	proxy ${V2_Path} localhost:2333 {
+	proxy ${X_Path} localhost:12346 {
 		websocket
 		header_upstream -Origin
 	}
 }
 EOF
 
-cat <<-EOF > /v2raybin/vmess.json
+cat <<-EOF > /Xraybin/vmess.json
 {
     "v": "2",
     "ps": "${AppName}.herokuapp.com",
@@ -126,12 +158,12 @@ cat <<-EOF > /v2raybin/vmess.json
     "net": "ws",
     "type": "none",
     "host": "",
-    "path": "${V2_Path}",
+    "path": "${Vmess_Path}",
     "tls": "tls"
 }
 EOF
 
-cat <<-EOF > /v2raybin/vless.json
+cat <<-EOF > /Xraybin/vless.json
 {
     "v": "2",
     "ps": "${AppName}.herokuapp.com",
@@ -142,7 +174,7 @@ cat <<-EOF > /v2raybin/vless.json
     "net": "ws",
     "type": "none",
     "host": "",
-    "path": "${V2_Path}",
+    "path": "${Vless_Path}",
     "tls": "tls"
 }
 EOF
@@ -157,7 +189,7 @@ else
   echo -n "${vmess}" | qrencode -s 6 -o /wwwroot/${V2_QR_Path}/v2.png
 fi
 
-cd /v2raybin
-./v2ray -config config.json &
+cd /Xraybin
+./Xray -config config.json &
 cd /caddybin
 ./caddy -conf="Caddyfile"

@@ -52,7 +52,7 @@ unzip Xray.zip
 rm -rf Xray.zip
 chmod +x Xray
 
-C_VER="v1.0.4"
+C_VER="v2.3.0"
 mkdir /caddybin
 cd /caddybin
 CADDY_URL="https://github.com/caddyserver/caddy/releases/download/$C_VER/caddy_${C_VER}_linux_amd64.tar.gz"

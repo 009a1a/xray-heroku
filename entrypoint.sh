@@ -52,7 +52,7 @@ unzip Xray.zip
 rm -rf Xray.zip
 chmod +x Xray
 
-C_VER="v2.3.0"
+C_VER="v1.0.3"
 mkdir /caddybin
 cd /caddybin
 CADDY_URL="https://github.com/caddyserver/caddy/releases/download/$C_VER/caddy_${C_VER}_linux_amd64.tar.gz"
@@ -66,7 +66,7 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
-cat <<-EOF > /Xraybin/config.json
+cat <<-EOF > /etc/Xraybin/config.json
 {
     "log":{
         "loglevel":"warning"
@@ -131,8 +131,8 @@ cat <<-EOF > /Xraybin/config.json
 }
 EOF                          
 
-echo /Xraybin/config.json
-cat /Xraybin/config.json
+echo /etc/Xraybin/config.json
+cat /etc/Xraybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
 http://0.0.0.0:${PORT}
@@ -147,7 +147,7 @@ http://0.0.0.0:${PORT}
 }
 EOF
 
-cat <<-EOF > /Xraybin/vmess.json
+cat <<-EOF > /etc/Xraybin/vmess.json
 {
     "v": "2",
     "ps": "${AppName}.herokuapp.com",
@@ -163,7 +163,7 @@ cat <<-EOF > /Xraybin/vmess.json
 }
 EOF
 
-cat <<-EOF > /Xraybin/vless.json
+cat <<-EOF > /etc/Xraybin/vless.json
 {
     "v": "2",
     "ps": "${AppName}.herokuapp.com",

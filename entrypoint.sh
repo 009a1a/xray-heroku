@@ -67,15 +67,51 @@ unzip Xray.zip
 rm -rf Xray.zip
 chmod +x Xray
 
-N_VER="v1.20.1"
-mkdir /nginxbin
-cd /nginxbin
-CADDY_URL="https://nginx.org/download/nginx-1.20.1.tar.gz"
-echo ${NGINX_URL}
-wget --no-check-certificate -qO 'nginx.tar.gz' ${NGINX_URL}
-tar xvf nginx.tar.gz
-rm -rf nginx.tar.gz
-chmod +x nginx
+server {
+    listen       ${PORT};
+    listen       [::]:${PORT};
+
+    root /wwwroot;
+
+    resolver 8.8.8.8:53;
+    location / {
+        proxy_pass https://${ProxySite};
+    }
+    
+    location ${Share_Path} {
+        root /wwwroot;
+    }
+
+    location = ${Vless_Path} {
+        if ($http_upgrade != "websocket") { # WebSocket协商失败时返回404
+            return 404;
+        }
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:12345;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $http_host;
+        # Show real IP in access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location = ${Vmess_Path} {
+        if ($http_upgrade != "websocket") { # WebSocket协商失败时返回404
+            return 404;
+        }
+        proxy_redirect off;
+        proxy_pass http://127.0.0.1:12346;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $http_host;
+        # Show real IP in access.log
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
 
 cd /wwwroot
 tar xvf wwwroot.tar.gz

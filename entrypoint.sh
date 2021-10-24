@@ -5,25 +5,40 @@ if [[ -z "${VER}" ]]; then
 fi
 echo ${VER}
 
-if [[ -z "${UUID}" ]]; then
+if [[ -z "${vmess_UUID}" ]]; then
   UUID="86d9b8a7-9dfa-42f4-b9ac-f6b9a9beacda"
 fi
-echo ${UUID}
+echo ${vmess_UUID}
 
-if [[ -z "${AlterID}" ]]; then
+if [[ -z "${vmess_AlterID}" ]]; then
   AlterID="64"
 fi
-echo ${AlterID}
+echo ${vmess_AlterID}
 
-if [[ -z "${V2_Path}" ]]; then
-  V2_Path="/static"
+if [[ -z "${vmess_Path}" ]]; then
+  vmess_Path="/static"
 fi
-echo ${V2_Path}
+echo ${vmess_Path}
 
-if [[ -z "${V2_QR_Path}" ]]; then
-  V2_QR_Path="qr_img"
+if [[ -z "${vmess_QR_Path}" ]]; then
+  vmess_QR_Path="qr_img"
 fi
-echo ${V2_QR_Path}
+echo ${vmess_QR_Path}
+
+if [[ -z "${Vless_UUID}" ]]; then
+  Vless_UUID="5c301bb8-6c77-41a0-a606-4ba11bbab084"
+fi
+echo ${Vless_UUID}
+
+if [[ -z "${Vless_Path}" ]]; then
+  Vless_Path="/static"
+fi
+echo ${Vless_Path}
+
+if [[ -z "${vless_QR_Path}" ]]; then
+  vless_QR_Path="qr_img"
+fi
+echo ${vless_QR_Path}
 
 rm -rf /etc/localtime
 ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
@@ -149,7 +164,7 @@ EOF
 
 cat <<-EOF > /etc/Xraybin/vmess.json
 {
-    "v": "2",
+    "x": "ray",
     "ps": "${AppName}.herokuapp.com",
     "add": "${AppName}.herokuapp.com",
     "port": "443",
@@ -165,7 +180,7 @@ EOF
 
 cat <<-EOF > /etc/Xraybin/vless.json
 {
-    "v": "2",
+    "x": "ray",
     "ps": "${AppName}.herokuapp.com",
     "add": "${AppName}.herokuapp.com",
     "port": "443",
@@ -182,11 +197,17 @@ EOF
 if [ "$AppName" = "no" ]; then
   echo "Do not generate QR code"
 else
-  mkdir /wwwroot/${V2_QR_Path}
-  vmess="vmess://$(cat /v2raybin/vmess.json | base64 -w 0)"
+  mkdir /wwwroot/${vmess_QR_Path}
+  vmess="vmess://$(cat /xraybin/vmess.json | base64 -w 0)"
   Linkbase64=$(echo -n "${vmess}" | tr -d '\n' | base64 -w 0)
-  echo "${Linkbase64}" | tr -d '\n' > /wwwroot/${V2_QR_Path}/index.html
-  echo -n "${vmess}" | qrencode -s 6 -o /wwwroot/${V2_QR_Path}/v2.png
+  echo "${Linkbase64}" | tr -d '\n' > /wwwroot/${vmess_QR_Path}/index.html
+  echo -n "${vmess}" | qrencode -s 6 -o /wwwroot/${vmess_QR_Path}/vmess.png
+else
+  mkdir /wwwroot/${vless_QR_Path}
+  vless="vless://$(cat /etc/xraybin/vless.json | base64 -w 0)"
+  Linkbase64=$(echo -n "${vless}" | tr -d '\n' | base64 -w 0)
+  echo "${Linkbase64}" | tr -d '\n' > /wwwroot/${vless_QR_Path}/index.html
+  echo -n "${vless}" | qrencode -s 6 -o /wwwroot/${vless_QR_Path}/vless.png
 fi
 
 cd /Xraybin

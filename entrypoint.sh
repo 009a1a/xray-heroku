@@ -80,12 +80,13 @@ cat <<-EOF > /v2raybin/config.json
                 {
                     "id":"${UUID}",
                     "alterId":"${AlterID}",
-                    "security": "auto",
+                    
                     "level":1,
                 }
             ]
         },
         "streamSettings":{
+	"security": "auto",
             "network":"ws",
             "wsSettings":{
                 "path":"${V2_Path}"

@@ -79,9 +79,9 @@ cat <<-EOF > /v2raybin/config.json
             "clients":[
                 {
                     "id":"${UUID}",
-                    "level":1,
                     "alterId":"${AlterID}",
-                    "security":"${Security}",
+                    "security": "auto",
+                    "level":1,
                 }
             ]
         },
@@ -124,7 +124,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "security":"${Security}",
+    "security": "auto",
     "net": "ws",
     "type": "none",
     "host": "",

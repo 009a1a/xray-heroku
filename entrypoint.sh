@@ -73,8 +73,8 @@ cat <<-EOF > /v2raybin/config.json
     },
     "inbound":{
         "protocol":"vmess",
-        "listen":"127.0.0.1",
-        "port":2333,
+        "listen":"0.0.0.0",
+        "port":37192,
         "settings":{
             "clients":[
                 {
@@ -109,7 +109,7 @@ http://0.0.0.0:${PORT}
 	root /wwwroot
 	index index.html
 	timeouts none
-	proxy ${V2_Path} localhost:2333 {
+	proxy ${V2_Path} localhost:37192 {
 		websocket
 		header_upstream -Origin
 	}

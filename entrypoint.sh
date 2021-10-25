@@ -81,7 +81,7 @@ cat <<-EOF > /v2raybin/config.json
                     "id":"${UUID}",
                     "level":1,
                     "alterId":"${AlterID}",
-                    "security":aes-128-gcm,
+                    "security":"${Security}",
                 }
             ]
         },
@@ -124,7 +124,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "security":"aes-128-gcm",
+    "security":"${Security}",
     "net": "ws",
     "type": "none",
     "host": "",

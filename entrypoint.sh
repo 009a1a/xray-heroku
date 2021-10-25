@@ -48,8 +48,8 @@ mkdir /v2raybin
 cd /v2raybin
 echo ${V2RAY_URL}
 wget --no-check-certificate -qO 'v2ray.zip' ${V2RAY_URL}
-unzip v2ray.zip
-rm -rf v2ray.zip
+unzip v2ray-linux.zip
+rm -rf v2ray-linux.zip
 chmod +x v2ray
 
 C_VER="v1.0.4"
@@ -81,7 +81,7 @@ cat <<-EOF > /v2raybin/config.json
                     "id":"${UUID}",
                     "level":1,
                     "alterId":"${AlterID}",
-                    "security":AES-128-GCM,
+                    "security":aes-128-gcm,
                 }
             ]
         },
@@ -124,7 +124,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "security":"AES-128-GCM",
+    "security":"aes-128-gcm",
     "net": "ws",
     "type": "none",
     "host": "",

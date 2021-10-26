@@ -97,7 +97,7 @@ cat <<-EOF > /v2raybin/config.json
             ]
         },
         "streamSettings":{
-            "network":"quic",
+            "network":"tcp",
             "security": "aes-128-gcm",
             "wsSettings":{
                 "path":"${V2_Path}"
@@ -141,7 +141,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "net": "quic",
+    "net": "tcp",
     "type": "none",
     "host": "",
     "path": "${V2_Path}",

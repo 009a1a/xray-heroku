@@ -97,7 +97,7 @@ cat <<-EOF > /v2raybin/config.json
             ]
         },
         "streamSettings":{
-            "network":"tcp",
+            "network":"ws",
             "security": "aes-128-gcm",
             "wsSettings":{
                 "path":"${V2_Path}"
@@ -141,7 +141,8 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "net": "tcp",
+    "security": "aes-128-gcm",
+    "net": "ws",
     "type": "none",
     "host": "",
     "path": "${V2_Path}",

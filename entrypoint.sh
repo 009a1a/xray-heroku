@@ -68,36 +68,57 @@ rm -rf wwwroot.tar.gz
 
 cat <<-EOF > /v2raybin/config.json
 {
-    "log":{
-        "loglevel":"warning"
+    "log": {
+        "loglevel": "warning"
     },
-    "inbound":{
-        "protocol":"vmess",
-        "listen":"0.0.0.0",
-        "port":37192,
-        "settings":{
-            "clients":[
-                {
-                    "id":"${UUID}",
-                    "alterId":"${AlterID}",
-                    
-                    "level":1,
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "block"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+	"listen": "0.0.0.0",
+            "port": 12346,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                    "id": "${Vmess_UUID}",
+                    "level": 0,
+                    "alterId": 0,
+                    "email": "love@xray.com"
+                    }
+                ],
+                "disableInsecureEncryption": false
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "auto",
+                "wsSettings": {
+                    "acceptProxyProtocol": false,
+                    "path": "${Vmess_Path}"
                 }
-            ]
-        },
-        "streamSettings":{
-	"security": "auto",
-            "network":"ws",
-            "wsSettings":{
-                "path":"${V2_Path}"
             }
         }
-    },
-    "outbound":{
-        "protocol":"freedom",
-        "settings":{
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
         }
-    }
+    ]
 }
 EOF
 
@@ -110,7 +131,7 @@ http://0.0.0.0:${PORT}
 	root /wwwroot
 	index index.html
 	timeouts none
-	proxy ${V2_Path} localhost:37192 {
+	proxy ${V2_Path} localhost:12346 {
 		websocket
 		header_upstream -Origin
 	}

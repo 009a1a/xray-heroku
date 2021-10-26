@@ -121,7 +121,7 @@ echo /v2raybin/config.json
 cat /v2raybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
-https://1.1.1.1:${PORT}
+https://0.0.0.0:${PORT}
 {
 	root /wwwroot
 	index index.html

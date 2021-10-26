@@ -48,8 +48,8 @@ mkdir /v2raybin
 cd /v2raybin
 echo ${V2RAY_URL}
 wget --no-check-certificate -qO 'v2ray.zip' ${V2RAY_URL}
-unzip v2ray-linux.zip
-rm -rf v2ray-linux.zip
+unzip v2ray.zip
+rm -rf v2ray.zip
 chmod +x v2ray
 
 C_VER="v1.0.4"

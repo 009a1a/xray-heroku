@@ -98,7 +98,7 @@ cat <<-EOF > /v2raybin/config.json
         },
         "streamSettings":{
             "network":"ws",
-            "security": "auto",
+            "security": "aes-128-gcm",
             "wsSettings":{
                 "path":"${V2_Path}"
             }

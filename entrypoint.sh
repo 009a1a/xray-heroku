@@ -85,8 +85,8 @@ cat <<-EOF > /v2raybin/config.json
     },
     "inbound":{
         "protocol":"vmess",
-        "listen":"127.0.0.1",
-        "port":2333,
+        "listen":"1.1.1.1",
+        "port":65535,
         "settings":{
             "clients":[
                 {
@@ -121,12 +121,12 @@ echo /v2raybin/config.json
 cat /v2raybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
-http://0.0.0.0:${PORT}
+https://1.1.1.1:${PORT}
 {
 	root /wwwroot
 	index index.html
 	timeouts none
-	proxy ${V2_Path} localhost:2333 {
+	proxy ${V2_Path} localhost:65535 {
 		websocket
 		header_upstream -Origin
 	}

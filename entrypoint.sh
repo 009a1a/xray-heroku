@@ -68,8 +68,20 @@ rm -rf wwwroot.tar.gz
 
 cat <<-EOF > /v2raybin/config.json
 {
-    "log":{
-        "loglevel":"warning"
+    "log": {
+        "loglevel": "none"
+    },
+    "routing": {
+        "domainStrategy": "IPOnDemand",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "block"
+            }
+        ]
     },
     "inbound":{
         "protocol":"vmess",
@@ -92,11 +104,16 @@ cat <<-EOF > /v2raybin/config.json
             }
         }
     },
-    "outbound":{
-        "protocol":"freedom",
-        "settings":{
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
         }
-    }
+    ]
 }
 EOF
 

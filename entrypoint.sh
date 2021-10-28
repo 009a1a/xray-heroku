@@ -79,7 +79,7 @@ cat <<-EOF > /v2raybin/config.json
                 "ip": [
                     "geoip:private"
                 ],
-                "outboundTag": "block"
+                "outboundsTag": "direct"
             }
         ]
     },
@@ -91,14 +91,14 @@ cat <<-EOF > /v2raybin/config.json
             "clients":[
                 {
                     "id":"${UUID}",
-                    "alterId":${AlterID},
-                    "level":1
+                    "level":1,
+                    "alterId":${AlterID}
                 }
             ]
         },
         "streamSettings":{
-            "security": "aes-128-gcm",
             "network":"ws",
+            "security": "aes-128-gcm",
             "wsSettings":{
                 "path":"${V2_Path}"
             }
@@ -111,7 +111,7 @@ cat <<-EOF > /v2raybin/config.json
         },
         {
             "protocol": "blackhole",
-            "tag": "block"
+            "tag": "direct"
         }
     ]
 }

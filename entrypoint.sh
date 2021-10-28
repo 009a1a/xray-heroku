@@ -127,7 +127,7 @@ https://0.0.0.0:${PORT}
 	index index.html
 	timeouts none
 	proxy ${V2_Path} localhost:10808 {
-		quic
+		websocket
 		header_upstream -Origin
 	}
 }

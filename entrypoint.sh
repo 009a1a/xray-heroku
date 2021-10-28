@@ -111,7 +111,7 @@ cat <<-EOF > /v2raybin/config.json
         },
         {
             "protocol": "blackhole",
-            "tag": "block"
+            "tag": "direct"
         }
     ]
 }

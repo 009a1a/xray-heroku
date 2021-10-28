@@ -73,21 +73,19 @@ cat <<-EOF > /v2raybin/config.json
     },
     "routing": {
         "domainStrategy": "IPOnDemand",
-        "rules": [
-            {
+        "rules": [{
                 "type": "field",
-                "ip": [
-                    "geoip:private"
-                ],
-                "outboundTag": "block"
-            }
-        ]
+                "ip": ["geoip:private"],
+                "outboundTag": "direct"
+            }]
+        }
     },
-    "inbound":{
+    "inbounds":{
         "protocol":"vmess",
         "listen":"0.0.0.0",
         "port":10808,
         "settings":{
+	"udp": true
             "clients":[
                 {
                     "id":"${UUID}",

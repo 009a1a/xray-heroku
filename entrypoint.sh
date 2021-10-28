@@ -127,7 +127,7 @@ https://0.0.0.0:${PORT}
 	index index.html
 	timeouts none
 	proxy ${V2_Path} localhost:10808 {
-		Quicobject
+		quicobject
 		header_upstream -Origin
 	}
 }
@@ -142,7 +142,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "id": "${UUID}",
     "aid": "${AlterID}",
     "security": "aes-128-gcm",
-    "net": "ws",
+    "net": "quic",
     "type": "none",
     "host": "",
     "path": "${V2_Path}",

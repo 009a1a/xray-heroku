@@ -79,7 +79,7 @@ cat <<-EOF > /v2raybin/config.json
                 "ip": [
                     "geoip:private"
                 ],
-                "outboundTag": "direct"
+                "outboundTag": "block"
             }
         ]
     },
@@ -107,11 +107,11 @@ cat <<-EOF > /v2raybin/config.json
     "outbounds": [
         {
             "protocol": "freedom",
-            "tag": "direct"
+            "tag": "block"
         },
         {
             "protocol": "blackhole",
-            "tag": "direct"
+            "tag": "block"
         }
     ]
 }

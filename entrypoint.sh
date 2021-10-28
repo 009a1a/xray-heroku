@@ -98,8 +98,8 @@ cat <<-EOF > /v2raybin/config.json
         },
         "streamSettings":{
             "security": "aes-128-gcm",
-            "network":"ws",
-            "wsSettings":{
+            "network":"quic",
+            "quicSettings":{
                 "path":"${V2_Path}"
             }
         }
@@ -127,7 +127,7 @@ https://0.0.0.0:${PORT}
 	index index.html
 	timeouts none
 	proxy ${V2_Path} localhost:10808 {
-		websocket
+		Quicobject
 		header_upstream -Origin
 	}
 }

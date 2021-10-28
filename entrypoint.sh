@@ -73,12 +73,15 @@ cat <<-EOF > /v2raybin/config.json
     },
     "routing": {
         "domainStrategy": "IPOnDemand",
-        "rules": [{
+        "rules": [
+            {
                 "type": "field",
-                "ip": ["geoip:private"],
+                "ip": [
+                    "geoip:private"
+                ],
                 "outboundTag": "direct"
-            }]
-        }
+            }
+        ]
     },
     "inbounds":{
         "protocol":"vmess",

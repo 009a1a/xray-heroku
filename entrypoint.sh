@@ -73,12 +73,15 @@ cat <<-EOF > /v2raybin/config.json
     },
     "routing": {
         "domainStrategy": "IPOnDemand",
-        "rules": [{
+        "rules": [
+            {
                 "type": "field",
-                "ip": ["geoip:private"],
+                "ip": [
+                    "geoip:private"
+                ],
                 "outboundTag": "block"
-            }]
-        }
+            }
+        ]
     },
     "inbounds":{
         "protocol":"vmess",
@@ -97,7 +100,8 @@ cat <<-EOF > /v2raybin/config.json
             "security": "aes-128-gcm",
             "network":"ws",
             "wsSettings":{
-                "path":"${V2_Path}"
+                "acceptProxyProtocol": true,
+		"path":"${V2_Path}"
             }
         }
     },

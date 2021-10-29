@@ -100,7 +100,7 @@ cat <<-EOF > /v2raybin/config.json
             "security": "aes-128-gcm",
             "network":"ws",
             "wsSettings":{
-                "acceptProxyProtocol": true,
+                "acceptProxyProtocol": false,
 		"path":"${V2_Path}"
             }
         }

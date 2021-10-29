@@ -77,8 +77,8 @@ cat <<-EOF > /v2raybin/config.json
                 "type": "field",
                 "ip": ["geoip:private"],
                 "outboundTag": "block"
-            }
-        ]
+            }]
+        }
     },
     "inbounds":{
         "protocol":"vmess",

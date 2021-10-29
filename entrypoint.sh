@@ -92,7 +92,7 @@ cat <<-EOF > /v2raybin/config.json
                 {
                     "id":"${UUID}",
                     "alterId":${AlterID},
-                    "level":1
+                    "level":"1"
                 }
             ]
         },
@@ -100,8 +100,7 @@ cat <<-EOF > /v2raybin/config.json
             "security": "aes-128-gcm",
             "network":"ws",
             "wsSettings":{
-                "acceptProxyProtocol": false,
-		"path":"${V2_Path}"
+                "path": "${V2_Path}"
             }
         }
     },

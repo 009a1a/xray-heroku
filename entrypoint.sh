@@ -88,7 +88,8 @@ cat <<-EOF > /v2raybin/config.json
         "listen":"0.0.0.0",
         "port":10808,
         "settings":{
-            "clients":[
+            "udp": true
+	    "clients":[
                 {
                     "id":"${UUID}",
                     "alterId":${AlterID},

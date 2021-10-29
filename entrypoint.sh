@@ -98,8 +98,8 @@ cat <<-EOF > /v2raybin/config.json
         },
         "streamSettings":{
             "security": "aes-128-gcm",
-            "network":"quic",
-            "quicSettings":{
+            "network":"ws",
+            "wsSettings":{
                 "path":"${V2_Path}"
             }
         }
@@ -142,7 +142,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "id": "${UUID}",
     "aid": "${AlterID}",
     "security": "aes-128-gcm",
-    "net": "quic",
+    "net": "ws",
     "type": "none",
     "host": "",
     "path": "${V2_Path}",

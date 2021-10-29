@@ -83,13 +83,12 @@ cat <<-EOF > /v2raybin/config.json
             }
         ]
     },
-    "inbound":{
+    "inbounds":{
         "protocol":"vmess",
         "listen":"0.0.0.0",
         "port":10808,
         "settings":{
-            "udp": true
-	    "clients":[
+            "clients":[
                 {
                     "id":"${UUID}",
                     "alterId":${AlterID},
@@ -100,6 +99,7 @@ cat <<-EOF > /v2raybin/config.json
         "streamSettings":{
             "security": "aes-128-gcm",
             "network":"ws",
+	    "udp": true
             "wsSettings":{
                 "path":"${V2_Path}"
             }

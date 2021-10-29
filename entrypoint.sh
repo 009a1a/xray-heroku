@@ -73,12 +73,9 @@ cat <<-EOF > /v2raybin/config.json
     },
     "routing": {
         "domainStrategy": "IPOnDemand",
-        "rules": [
-            {
+        "rules": [{
                 "type": "field",
-                "ip": [
-                    "geoip:private"
-                ],
+                "ip": ["geoip:private"],
                 "outboundTag": "block"
             }
         ]
@@ -99,7 +96,6 @@ cat <<-EOF > /v2raybin/config.json
         "streamSettings":{
             "security": "aes-128-gcm",
             "network":"ws",
-	    "udp": true
             "wsSettings":{
                 "path":"${V2_Path}"
             }

@@ -36,10 +36,17 @@ ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
 date -R
 
 if [ "$VER" = "latest" ]; then
-  VER=`wget -qO- "https://api.github.com/repos/XTLS/Xray-core/releases/latest" | sed -n -r -e 's/.*"tag_name".+?"([vV0-9\.]+?)".*/\1/p'`
-  [[ -z "${VER}" ]] && VER="v1.2.2"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-32.zip"
 else
-  VER="v$VER"
+  X_VER="v$VER"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$V_VER/Xray-linux-32.zip"
+fi
+
+if [ "$VER" = "latest" ]; then
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
+else
+  X_VER="v$VER"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$V_VER/Xray-linux-64.zip"
 fi
 
 mkdir /xraybin

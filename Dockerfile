@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+COPY wwwroot.tar.gz /wwwroot/wwwroot.tar.gz
 COPY conf/ /conf
 COPY entrypoint.sh /entrypoint.sh
 

@@ -39,14 +39,14 @@ if [ "$VER" = "latest" ]; then
   XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-32.zip"
 else
   X_VER="v$VER"
-  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$X_VER/Xray-linux-32.zip"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/${VER}/Xray-linux-32.zip"
 fi
 
 if [ "$VER" = "latest" ]; then
   XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
 else
   X_VER="v$VER"
-  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$X_VER/Xray-linux-64.zip"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/${VER}/Xray-linux-64.zip"
 fi
 
 X_VER="latest"

@@ -10,5 +10,7 @@ RUN set -ex\
     && apt install -y wget unzip qrencode\
     && apt install -y nginx\
     && chmod +x /entrypoint.sh
-    
+
+RUN chmod +x /entrypoint.sh
+
 CMD /entrypoint.sh

@@ -8,6 +8,7 @@ RUN set -ex\
     && apt update -y \
     && apt upgrade -y \
     && apt install -y wget unzip qrencode\
+    && apt install -y shadowsocks-libev\
     && apt install -y nginx\
     && chmod +x /entrypoint.sh
 

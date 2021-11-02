@@ -53,9 +53,9 @@ X_VER="latest"
 mkdir /Xraybin
 cd /Xraybin
 echo ${XRAY_URL}
-wget --no-check-certificate -qO 'xray.zip' ${XRAY_URL}
-unzip xray.zip
-rm -rf xray.zip
+wget --no-check-certificate -qO 'Xray-linux.zip' ${XRAY_URL}
+unzip Xray-linux.zip
+rm -rf Xray-linux.zip
 chmod +x xray
 
 cd /wwwroot

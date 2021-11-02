@@ -12,6 +12,6 @@ RUN set -ex\
     && apt install -y nginx\
     && apt chmod +x /entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
+RUN apt chmod +x /entrypoint.sh
 
 CMD /entrypoint.sh

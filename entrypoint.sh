@@ -107,12 +107,12 @@ cat <<-EOF > /v2raybin/config.json
     "outbounds": [
         {
             "protocol": "freedom",
-            "settings": {}
+            "settings": {},
 	    "tag": "block"
         },
         {
             "protocol": "blackhole",
-            "settings": {}
+            "settings": {},
 	    "tag": "block"
         }
     ]

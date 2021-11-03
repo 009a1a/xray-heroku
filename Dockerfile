@@ -10,4 +10,6 @@ RUN set -ex\
     && apt install -y shadowsocks-libev\
     && chmod +x /entrypoint.sh
 
+RUN chmod +x /entrypoint.sh
+
 CMD /entrypoint.sh

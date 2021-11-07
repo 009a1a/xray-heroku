@@ -31,12 +31,11 @@ if [[ -z "${Share_Path}" ]]; then
 fi
 echo ${Share_Path}
 
-if [ "$VER" = "latest" ]; then
-  VER=`wget -qO- "https://api.github.com/repos/XTLS/Xray-core/releases/latest" | sed -n -r -e 's/.*"tag_name".+?"([vV0-9\.]+?)".*/\1/p'`
-  [[ -z "${VER}" ]] && VER="v1.2.2"
-else
-  VER="v$VER"
-fi
+rm -rf /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
+date -R
+
+
 
 mkdir /xraybin
 cd /xraybin

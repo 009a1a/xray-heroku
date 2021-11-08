@@ -88,7 +88,7 @@ sed -e "/^#/d"\
     -e "s/\${_Vless_UUID}/${Vless_UUID}/g"\
     -e "s/\${_Vmess_UUID}/${Vmess_UUID}/g"\
     -e "$s"\
-    /etc/index.html > /wwwroot/${Share_Path}/index.html
+    /etc/Share.html > /wwwroot/${Share_Path}/index.html
 echo /wwwroot/${Share_Path}/index.html
 cat /wwwroot/${Share_Path}/index.html
 

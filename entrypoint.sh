@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Xray版本
+set -ex
 if [[ -z "${VER}" ]]; then
   VER="latest"
 fi

@@ -63,12 +63,7 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
-sed -e "/^#/d"\
-    -e "s/\${Vless_UUID}/${Vless_UUID}/g"\
-    -e "s|\${Vless_Path}|${Vless_Path}|g"\
-    -e "s/\${Vmess_UUID}/${Vmess_UUID}/g"\
-    -e "s|\${Vmess_Path}|${Vmess_Path}|g"\
-    /conf/Xray.template.json >  /xraybin/config.json
+
 echo /xraybin/config.json
 cat /xraybin/config.json
 

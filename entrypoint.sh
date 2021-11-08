@@ -151,7 +151,7 @@ else
   echo "site: ${ProxySite}"
 fi
 
-cat <<-EOF > /nginxbin/nginxfile
+cat <<-EOF > /nginxbin/Nginxfile
 server {
     listen       ${PORT};
     listen       [::]:${PORT};
@@ -215,5 +215,6 @@ cat /wwwroot/${Share_Path}/index.html
 
 cd /xraybin
 ./xray -config config.json &
-rm -rf /etc/nginx/sites-enabled/default
-nginx -g 'daemon off;'
+cd /nginxbin
+./nginx -conf="Nginxfile"
+

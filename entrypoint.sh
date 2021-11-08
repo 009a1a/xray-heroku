@@ -63,7 +63,7 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
-cat <<-EOF > /v2raybin/config.json
+cat <<-EOF > /xraybin/config.json
 {
     "log": {
         "loglevel": "warning"
@@ -198,6 +198,14 @@ server {
     }
 }
 EOF
+
+echo /etc/nginx/conf.d/ray.conf
+cat /etc/nginx/conf.d/ray.conf
+
+[ ! -d /wwwroot/${Share_Path} ] && mkdir -p /wwwroot/${Share_Path}
+
+echo /wwwroot/${Share_Path}/index.html
+cat /wwwroot/${Share_Path}/index.html
 
 cd /xraybin
 ./xray -config config.json &

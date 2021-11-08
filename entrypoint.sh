@@ -66,7 +66,7 @@ sed -e "/^#/d"\
     -e "s|\${Vless_Path}|${Vless_Path}|g"\
     -e "s/\${Vmess_UUID}/${Vmess_UUID}/g"\
     -e "s|\${Vmess_Path}|${Vmess_Path}|g"\
-    /conf/Xray.template.json >  /xraybin/config.json
+    /etc/Xray.template.json >  /xraybin/config.json
 echo /xraybin/config.json
 cat /xraybin/config.json
 
@@ -84,7 +84,7 @@ sed -e "/^#/d"\
     -e "s|\${Vmess_Path}|${Vmess_Path}|g"\
     -e "s|\${Share_Path}|${Share_Path}|g"\
     -e "$s"\
-    /conf/nginx.template.conf > /etc/nginx/conf.d/ray.conf
+    /etc/Nginx.template.conf > /etc/nginx/conf.d/ray.conf
 echo /etc/nginx/conf.d/ray.conf
 cat /etc/nginx/conf.d/ray.conf
 
@@ -95,7 +95,7 @@ sed -e "/^#/d"\
     -e "s/\${_Vless_UUID}/${Vless_UUID}/g"\
     -e "s/\${_Vmess_UUID}/${Vmess_UUID}/g"\
     -e "$s"\
-    /conf/share.html > /wwwroot/${Share_Path}/index.html
+    /etc/index.html > /wwwroot/${Share_Path}/index.html
 echo /wwwroot/${Share_Path}/index.html
 cat /wwwroot/${Share_Path}/index.html
 

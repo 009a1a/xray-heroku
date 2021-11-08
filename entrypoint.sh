@@ -63,6 +63,80 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "block"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 12345,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "${Vless_UUID}"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": false,
+                    "path": "${Vless_Path}"
+                }
+            }
+        },
+        {
+            "listen": "0.0.0.0",
+            "port": 12346,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                    "id": "${Vmess_UUID}",
+                    "level": 0,
+                    "alterId": 0,
+                    "email": "love@xray.com"
+                    }
+                ],
+                "disableInsecureEncryption": false
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "acceptProxyProtocol": false,
+                    "path": "${Vmess_Path}"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ]
+}
 
 echo /xraybin/config.json
 cat /xraybin/config.json

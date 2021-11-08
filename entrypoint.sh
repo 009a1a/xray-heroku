@@ -199,22 +199,13 @@ server {
 }
 EOF
 
-echo /etc/nginx/conf.d/ray.conf
-cat /etc/nginx/conf.d/ray.conf
-
-[ ! -d /wwwroot/${Share_Path} ] && mkdir -p /wwwroot/${Share_Path}
-sed -e "/^#/d"\
-    -e "s|\${_Vless_Path}|${Vless_Path}|g"\
-    -e "s|\${_Vmess_Path}|${Vmess_Path}|g"\
-    -e "s/\${_Vless_UUID}/${Vless_UUID}/g"\
-    -e "s/\${_Vmess_UUID}/${Vmess_UUID}/g"\
-    -e "$s"\
-    /conf/share.html > /wwwroot/${Share_Path}/index.html
-echo /wwwroot/${Share_Path}/index.html
-cat /wwwroot/${Share_Path}/index.html
+echo /nginx/conf.d/ray.conf
+cat /nginx/conf.d/ray.conf
 
 cd /xraybin
 ./xray -config config.json &
 cd /nginxbin
 ./nginx -conf="Nginxfile"
+
+
 

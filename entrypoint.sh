@@ -38,14 +38,14 @@ date -R
 if [ "$VER" = "latest" ]; then
   XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-32.zip"
 else
-    VER="v$VER"
+  VER="v$VER"
   XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/${VER}/Xray-linux-32.zip"
 fi
 
 if [ "$VER" = "latest" ]; then
   XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
 else
-    VER="v$VER"
+  VER="v$VER"
   XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/${VER}/Xray-linux-64.zip"
 fi
 

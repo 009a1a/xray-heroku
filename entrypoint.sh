@@ -49,7 +49,7 @@ else
   XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/${VER}/Xray-linux-64.zip"
 fi
 
-X_VER="latest"
+VER="latest"
 mkdir /Xraybin
 cd /Xraybin
 echo ${XRAY_URL}

@@ -56,3 +56,8 @@ wget --no-check-certificate -qO 'Xray.zip' ${XRAY_URL}
 unzip Xray.zip
 rm -rf Xray.zip
 chmod +x Xray
+
+cd /wwwroot
+tar xvf wwwroot.tar.gz
+rm -rf wwwroot.tar.gz
+

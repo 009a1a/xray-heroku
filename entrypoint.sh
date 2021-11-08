@@ -214,6 +214,6 @@ echo /wwwroot/${Share_Path}/index.html
 cat /wwwroot/${Share_Path}/index.html
 
 cd /xraybin
-./xray run -c ./config.json &
+./xray -config config.json &
 rm -rf /etc/nginx/sites-enabled/default
 nginx -g 'daemon off;'

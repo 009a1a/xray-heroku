@@ -63,6 +63,7 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
+cat <<-EOF > /v2raybin/config.json
 {
     "log": {
         "loglevel": "warning"
@@ -137,6 +138,7 @@ rm -rf wwwroot.tar.gz
         }
     ]
 }
+EOF
 
 echo /xraybin/config.json
 cat /xraybin/config.json
@@ -149,13 +151,7 @@ else
   echo "site: ${ProxySite}"
 fi
 
-sed -e "/^#/d"\
-    -e "s/\${PORT}/${PORT}/g"\
-    -e "s|\${Vless_Path}|${Vless_Path}|g"\
-    -e "s|\${Vmess_Path}|${Vmess_Path}|g"\
-    -e "s|\${Share_Path}|${Share_Path}|g"\
-    -e "$s"\
-    /conf/nginx.template.conf > /etc/nginx/conf.d/ray.conf
+cat <<-EOF > /caddybin/Caddyfile
 echo /etc/nginx/conf.d/ray.conf
 cat /etc/nginx/conf.d/ray.conf
 

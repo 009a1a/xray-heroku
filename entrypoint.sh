@@ -199,13 +199,13 @@ server {
 }
 EOF
 
-echo /nginx/conf.d/ray.conf
-cat /nginx/conf.d/ray.conf
-
 cd /xraybin
 ./xray -config config.json &
 cd /nginxbin
 ./nginx -conf="Nginxfile"
+
+
+
 
 
 

@@ -280,9 +280,9 @@ echo /wwwroot/${Share_Path}/index.html
 cat /wwwroot/${Share_Path}/index.html
 
 cd /xraybin
-./xray -config config.json &
-cd /nginxbin
-./nginx -conf="Nginxfile"
+./xray run -c ./config.json &
+rm -rf /etc/nginx/sites-enabled/default
+nginx -g 'daemon off;'
 
 
 

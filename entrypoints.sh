@@ -61,3 +61,6 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
+    /conf/Xray.template.json >  /xraybin/config.json
+echo /xraybin/config.json
+cat /xraybin/config.json

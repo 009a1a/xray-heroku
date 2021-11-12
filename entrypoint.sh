@@ -93,6 +93,6 @@ echo /wwwroot/${Share_Path}/index.html
 cat /wwwroot/${Share_Path}/index.html
 
 cd /xraybin
-./xraybin run -config ./config.json &
+./xraybin run -conf ./config.json &
 rm -rf /etc/nginx/sites-enabled/default
 nginx -g 'daemon off;'

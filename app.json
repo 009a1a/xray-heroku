@@ -1,5 +1,5 @@
 {
-  "name": "V2ray简易部署",
+  "name": "V2ray部署",
   "description": "Deploy V2ray to Heroku.",
   "keywords": ["V2ray"],
   "env": {

@@ -1,7 +1,7 @@
 {
-  "name": "xray部署",
-  "description": "Deploy xray to Heroku.",
-  "keywords": ["xray"],
+  "name": "v2ray部署",
+  "description": "Deploy v2ray to Heroku.",
+  "keywords": ["v2ray"],
   "env": {
     "AppName": {
        "description": "请输入最上方填写的App Name，用于生成二维码和订阅链接，如果不想生成输入no",
@@ -13,7 +13,7 @@
      }, 
     "UUID": {
        "description": "vless协议默认UUID，请输入自己的UUID，（http://www.uuid.online/ 在线生成UUID），客户端需要此参数",
-       "value": "4890bd47-5180-4b1c-9a5d-3ef686543112"
+       "value": "162d3dfb-f1b4-481b-b450-664d7c19fcba"
      },
          }, 
     "V2_Path": {

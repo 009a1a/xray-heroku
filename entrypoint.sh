@@ -85,16 +85,15 @@ cat <<-EOF > /v2raybin/config.json
         "settings": {
                 "clients": [
                     {
-                        "id": "${vless_UUID}"
+                        "id": "${Vless_UUID}"
                     }
                 ],
-                "decryption": "none"
+                "encryption": "none"
             },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                "path": "${V2_Path}"
+            "streamSettings":{
+                "network":"ws",
+                "wsSettings":{
+                    "path":"${V2_Path}"
             }
         }
     },
@@ -134,8 +133,7 @@ cat <<-EOF > /v2raybin/vless.json
     "add": "${AppName}.herokuapp.com",
     "port": "443",
     "id": "${UUID}",
-    "decryption": "none",
-    "security": "none",
+    "encryption": "none",
     "net": "ws",
     "type": "none",
     "host": "",
@@ -158,3 +156,4 @@ cd /v2raybin
 ./v2ray -config config.json &
 cd /caddybin
 ./caddy -conf="Caddyfile"
+

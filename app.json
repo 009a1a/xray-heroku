@@ -25,8 +25,8 @@
        "value": "qr_img"
      }
   },
-  "website": "",
-  "repository": "",
+  "website": "https://github.com/Trumpy/xray-heroku",
+  "repository": "https://github.com/Trumpy/xray-heroku",
   "stack": "container"
  }
 

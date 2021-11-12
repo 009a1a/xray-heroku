@@ -1,3 +1,5 @@
+
+
 #! /bin/bash
 set -ex
 if [[ -z "${VER}" ]]; then
@@ -9,8 +11,6 @@ if [[ -z "${UUID}" ]]; then
   UUID="86d9b8a7-9dfa-42f4-b9ac-f6b9a9beacda"
 fi
 echo ${UUID}
-
-
 
 if [[ -z "${V2_Path}" ]]; then
   V2_Path="/static"

@@ -10,10 +10,7 @@ if [[ -z "${UUID}" ]]; then
 fi
 echo ${UUID}
 
-if [[ -z "${AlterID}" ]]; then
-  AlterID="64"
-fi
-echo ${AlterID}
+
 
 if [[ -z "${V2_Path}" ]]; then
   V2_Path="/static"

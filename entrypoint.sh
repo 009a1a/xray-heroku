@@ -85,20 +85,20 @@ cat <<-EOF > /v2raybin/config.json
     },
     "inbounds":{
         "protocol":"vmess",
-        "listen":"1.1.1.1",
+        "listen":"0.0.0.0",
         "port":10808,
         "settings":{
             "clients":[
                 {
                     "id":"${UUID}",
-                    "alterId":${AlterID},
-                    "level":1
+                    "level":1,
+                    "alterId":${AlterID}
                 }
             ]
         },
         "streamSettings":{
-            "security": "aes-128-gcm",
             "network":"ws",
+            "security": "aes-128-gcm",
             "wsSettings":{
                 "path": "${V2_Path}"
             }
@@ -121,7 +121,7 @@ echo /v2raybin/config.json
 cat /v2raybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
-https://1.1.1.1:${PORT}
+https://0.0.0.0:${PORT}
 {
 	root /wwwroot
 	index index.html
@@ -141,8 +141,8 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "security": "aes-128-gcm",
     "net": "ws",
+    "security": "aes-128-gcm",
     "type": "none",
     "host": "",
     "path": "${V2_Path}",

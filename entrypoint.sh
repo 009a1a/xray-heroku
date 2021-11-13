@@ -25,27 +25,20 @@ ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
 date -R
 
 if [ "$VER" = "latest" ]; then
-  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-32.zip"
+  VER=`wget -qO- "https://api.github.com/repos/XTLS/Xray-core/releases/latest" | sed -n -r -e 's/.*"tag_name".+?"([vV0-9\.]+?)".*/\1/p'`
+  [[ -z "${VER}" ]] && VER="v1.2.2"
 else
-  X_VER="v$VER"
-  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$X_VER/Xray-linux-32.zip"
+  VER="v$VER"
 fi
 
-if [ "$VER" = "latest" ]; then
-  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
-else
-  X_VER="v$VER"
-  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$X_VER/Xray-linux-64.zip"
-fi
-
-V_VER="latest"
-mkdir /Xraybin
-cd /Xraybin
-echo ${XRAY_URL}
-wget --no-check-certificate -qO 'Xray-linux-64.zip' ${XRAY_URL}
+mkdir /xraybin
+cd /xraybin
+RAY_URL="https://github.com/XTLS/Xray-core/releases/download/${VER}/Xray-linux-64.zip"
+echo ${RAY_URL}
+wget --no-check-certificate ${RAY_URL}
 unzip Xray-linux-64.zip
-rm -rf Xray-linux-64.zip
-chmod +x Xray
+rm -f Xray-linux-64.zip
+chmod +x ./xray
 
 C_VER="v1.0.4"
 mkdir /caddybin

@@ -114,7 +114,7 @@ echo /Xraybin/config.json
 cat /Xraybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
-https://0.0.0.0:${PORT}
+https://8.8.8.8:${PORT}
 {
 	root /wwwroot
 	index index.html

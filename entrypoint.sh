@@ -42,9 +42,9 @@ V_VER="latest"
 mkdir /Xraybin
 cd /Xraybin
 echo ${XRAY_URL}
-wget --no-check-certificate -qO 'Xray.zip' ${XRAY_URL}
-unzip Xray.zip
-rm -rf Xray.zip
+wget --no-check-certificate -qO 'Xray-linux-64.zip' ${XRAY_URL}
+unzip Xray-linux-64.zip
+rm -rf Xray-linux-64.zip
 chmod +x Xray
 
 C_VER="v1.0.4"

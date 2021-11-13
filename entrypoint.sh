@@ -10,15 +10,15 @@ if [[ -z "${UUID}" ]]; then
 fi
 echo ${UUID}
 
-if [[ -z "${V2_Path}" ]]; then
-  V2_Path="/static"
+if [[ -z "${X_Path}" ]]; then
+  X_Path="/static"
 fi
-echo ${V2_Path}
+echo ${X_Path}
 
-if [[ -z "${V2_QR_Path}" ]]; then
-  V2_QR_Path="qr_img"
+if [[ -z "${X_QR_Path}" ]]; then
+  X_QR_Path="qr_img"
 fi
-echo ${V2_QR_Path}
+echo ${X_QR_Path}
 
 rm -rf /etc/localtime
 ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
@@ -42,9 +42,9 @@ V_VER="latest"
 mkdir /Xraybin
 cd /Xraybin
 echo ${XRAY_URL}
-wget --no-check-certificate -qO 'Xray-linux.zip' ${XRAY_URL}
-unzip Xray-linux.zip
-rm -rf Xray-linux.zip
+wget --no-check-certificate -qO 'Xray.zip' ${XRAY_URL}
+unzip Xray.zip
+rm -rf Xray.zip
 chmod +x Xray
 
 C_VER="v1.0.4"

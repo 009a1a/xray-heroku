@@ -85,7 +85,7 @@ cat <<-EOF > /v2raybin/config.json
     },
     "inbounds":{
         "protocol":"vmess",
-        "listen":"0.0.0.0",
+        "listen":"1.1.1.1",
         "port":10808,
         "settings":{
             "clients":[
@@ -121,7 +121,7 @@ echo /v2raybin/config.json
 cat /v2raybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
-https://0.0.0.0:${PORT}
+https://1.1.1.1:${PORT}
 {
 	root /wwwroot
 	index index.html
@@ -161,6 +161,6 @@ else
 fi
 
 cd /v2raybin
-./v2ray run -config config.json &
+./v2ray -config config.json &
 cd /caddybin
 ./caddy -conf="Caddyfile"

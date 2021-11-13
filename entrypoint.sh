@@ -25,27 +25,27 @@ ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
 date -R
 
 if [ "$VER" = "latest" ]; then
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-32.zip"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-32.zip"
 else
-  V_VER="v$VER"
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-32.zip"
+  X_VER="v$VER"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$X_VER/Xray-linux-32.zip"
 fi
 
 if [ "$VER" = "latest" ]; then
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
 else
-  V_VER="v$VER"
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-64.zip"
+  X_VER="v$VER"
+  XRAY_URL="https://github.com/XTLS/Xray-core/releases/download/$X_VER/Xray-linux-64.zip"
 fi
 
 V_VER="latest"
-mkdir /v2raybin
-cd /v2raybin
-echo ${V2RAY_URL}
-wget --no-check-certificate -qO 'v2ray.zip' ${V2RAY_URL}
-unzip v2ray.zip
-rm -rf v2ray.zip
-chmod +x v2ray
+mkdir /Xraybin
+cd /Xraybin
+echo ${XRAY_URL}
+wget --no-check-certificate -qO 'Xray-linux.zip' ${XRAY_URL}
+unzip Xray-linux.zip
+rm -rf Xray-linux.zip
+chmod +x Xray
 
 C_VER="v1.0.4"
 mkdir /caddybin
@@ -61,7 +61,7 @@ cd /wwwroot
 tar xvf wwwroot.tar.gz
 rm -rf wwwroot.tar.gz
 
-cat <<-EOF > /v2raybin/config.json
+cat <<-EOF > /Xraybin/config.json
 {
     "log": {
         "loglevel": "none"
@@ -85,7 +85,7 @@ cat <<-EOF > /v2raybin/config.json
         "settings": {
                 "clients": [
                     {
-                        "id": "${Vless_UUID}"
+                        "id": "${vless_UUID}"
                     }
                 ],
                 "encryption": "none"
@@ -93,7 +93,7 @@ cat <<-EOF > /v2raybin/config.json
             "streamSettings":{
                 "network":"ws",
                 "wsSettings":{
-                    "path":"${V2_Path}"
+                    "path":"${X_Path}"
             }
         }
     },
@@ -110,8 +110,8 @@ cat <<-EOF > /v2raybin/config.json
 }
 EOF
 
-echo /v2raybin/config.json
-cat /v2raybin/config.json
+echo /Xraybin/config.json
+cat /Xraybin/config.json
 
 cat <<-EOF > /caddybin/Caddyfile
 https://0.0.0.0:${PORT}
@@ -119,16 +119,16 @@ https://0.0.0.0:${PORT}
 	root /wwwroot
 	index index.html
 	timeouts none
-	proxy ${V2_Path} localhost:10808 {
+	proxy ${X_Path} localhost:10808 {
 		websocket
 		header_upstream -Origin
 	}
 }
 EOF
 
-cat <<-EOF > /v2raybin/vless.json
+cat <<-EOF > /Xraybin/vless.json
 {
-    "v": "2",
+    "X": "ray",
     "ps": "${AppName}.herokuapp.com",
     "add": "${AppName}.herokuapp.com",
     "port": "443",
@@ -137,7 +137,7 @@ cat <<-EOF > /v2raybin/vless.json
     "net": "ws",
     "type": "none",
     "host": "",
-    "path": "${V2_Path}",
+    "path": "${X_Path}",
     "tls": "tls"
 }
 EOF
@@ -145,15 +145,15 @@ EOF
 if [ "$AppName" = "no" ]; then
   echo "Do not generate QR code"
 else
-  mkdir /wwwroot/${V2_QR_Path}
-  vless="vless://$(cat /v2raybin/vless.json | base64 -w 0)"
+  mkdir /wwwroot/${X_QR_Path}
+  vless="vless://$(cat /Xraybin/vless.json | base64 -w 0)"
   Linkbase64=$(echo -n "${vless}" | tr -d '\n' | base64 -w 0)
-  echo "${Linkbase64}" | tr -d '\n' > /wwwroot/${V2_QR_Path}/index.html
-  echo -n "${vless}" | qrencode -s 6 -o /wwwroot/${V2_QR_Path}/v2.png
+  echo "${Linkbase64}" | tr -d '\n' > /wwwroot/${X_QR_Path}/index.html
+  echo -n "${vless}" | qrencode -s 6 -o /wwwroot/${X_QR_Path}/X.png
 fi
 
-cd /v2raybin
-./v2ray -config config.json &
+cd /Xraybin
+./Xray run -config config.json &
 cd /caddybin
 ./caddy -conf="Caddyfile"
 

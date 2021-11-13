@@ -80,7 +80,7 @@ cat <<-EOF > /Xraybin/config.json
     },
     "inbounds":{
         "protocol":"vless",
-        "listen":"0.0.0.0",
+        "listen":"8.8.8.8",
         "port":10808,
         "settings": {
                 "clients": [

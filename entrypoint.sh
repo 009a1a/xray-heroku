@@ -83,7 +83,7 @@ cat <<-EOF > /v2raybin/config.json
             }
         ]
     },
-    "inbounds":{
+    "inbound":{
         "protocol":"vmess",
         "listen":"0.0.0.0",
         "port":10808,
@@ -91,8 +91,8 @@ cat <<-EOF > /v2raybin/config.json
             "clients":[
                 {
                     "id":"${UUID}",
-                    "level":1,
-                    "alterId":${AlterID}
+                    "level":"1",
+                    "alterId":"${AlterID}"
                 }
             ]
         },
@@ -141,8 +141,8 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "security": "aes-128-gcm",
     "net": "ws",
+    "security": "aes-128-gcm",
     "type": "none",
     "host": "",
     "path": "${V2_Path}",

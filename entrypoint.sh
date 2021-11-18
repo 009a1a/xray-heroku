@@ -91,13 +91,13 @@ cat <<-EOF > /v2raybin/config.json
             "clients":[
                 {
                     "id":"${UUID}",
-                    "level":1,
-                    "alterId":${AlterID}
+                    "alterId":${AlterID},
+                    "level":1
                 }
             ]
         },
         "streamSettings":{
-            "security": "aes-128-gcm",
+            "security": "chacha20-ietf-poly1305",
             "network":"ws",
             "wsSettings":{
                 "path": "${V2_Path}"
@@ -141,7 +141,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "security": "aes-128-gcm",
+    "security": "chacha20-ietf-poly1305",
     "net": "ws",
     "type": "none",
     "host": "",

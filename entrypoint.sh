@@ -103,7 +103,7 @@ cat <<-EOF > /v2raybin/config.json
             "wsSettings": {
                 "host": "${V2_Host}",
 		"path": "${V2_Path}",
-		"tls": "tls"
+		"tls": "tls",
 		"SNI/Bug host": "${V2_SNI/Bug host}",
 		"allowlnsecure": "false"
             }

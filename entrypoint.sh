@@ -83,7 +83,7 @@ cat <<-EOF > /v2raybin/config.json
             }
         ]
     },
-    "inbound": {
+    "inbounds": {
         "protocol": "vmess",
         "listen": "0.0.0.0",
         "port": 10808,

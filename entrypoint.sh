@@ -104,6 +104,8 @@ cat <<-EOF > /v2raybin/config.json
                 "host": "${V2_Host}",
 		"path": "${V2_Path}",
 		"tls": "tls"
+		"SNI/Bug host": "${V2_SNI/Bug host}",
+		"allowlnsecure": "false"
             }
         }
     },

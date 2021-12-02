@@ -99,9 +99,11 @@ cat <<-EOF > /v2raybin/config.json
         "streamSettings": {
             "security": "xchacha20-ietf-poly1305",
             "network": "ws",
+	    "type": "none",
             "wsSettings": {
                 "host": "${V2_Host}",
-		"path": "${V2_Path}"
+		"path": "${V2_Path}",
+		"tls": "tls"
             }
         }
     },

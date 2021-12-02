@@ -100,7 +100,8 @@ cat <<-EOF > /v2raybin/config.json
             "security": "xchacha20-ietf-poly1305",
             "network":"ws",
             "wsSettings":{
-                "path": "${V2_Path}"
+                "host": "",
+		"path": "${V2_Path}"
             }
         }
     },

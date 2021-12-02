@@ -83,7 +83,7 @@ cat <<-EOF > /v2raybin/config.json
             }
         ]
     },
-    "inbounds": {
+    "inbound": {
         "protocol": "vmess",
         "listen": "0.0.0.0",
         "port": 10808,
@@ -100,7 +100,8 @@ cat <<-EOF > /v2raybin/config.json
             "security": "xchacha20-ietf-poly1305",
             "network": "ws",
             "wsSettings": {
-                "path": "${V2_Path}"
+                "host": "${V2_Host}",
+		"path": "${V2_Path}"
             }
         }
     },

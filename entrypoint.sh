@@ -97,7 +97,7 @@ cat <<-EOF > /v2raybin/config.json
             ]
         },
         "streamSettings":{
-            "security": "chacha20-ietf-poly1305",
+            "security": "xchacha20-ietf-poly1305",
             "network":"ws",
             "wsSettings":{
                 "path": "${V2_Path}"
@@ -141,7 +141,7 @@ cat <<-EOF > /v2raybin/vmess.json
     "port": "443",
     "id": "${UUID}",
     "aid": "${AlterID}",
-    "security": "chacha20-ietf-poly1305",
+    "security": "xchacha20-ietf-poly1305",
     "net": "ws",
     "type": "none",
     "host": "",

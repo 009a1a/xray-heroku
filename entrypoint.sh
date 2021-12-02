@@ -1,27 +1,27 @@
 #! /bin/bash
 set -ex
 if [[ -z "${VER}" ]]; then
-  VER="latest"
+  VER= "latest"
 fi
 echo ${VER}
 
 if [[ -z "${UUID}" ]]; then
-  UUID="86d9b8a7-9dfa-42f4-b9ac-f6b9a9beacda"
+  UUID= "86d9b8a7-9dfa-42f4-b9ac-f6b9a9beacda"
 fi
 echo ${UUID}
 
 if [[ -z "${AlterID}" ]]; then
-  AlterID="64"
+  AlterID= "64"
 fi
 echo ${AlterID}
 
 if [[ -z "${V2_Path}" ]]; then
-  V2_Path="/static"
+  V2_Path= "/static"
 fi
 echo ${V2_Path}
 
 if [[ -z "${V2_QR_Path}" ]]; then
-  V2_QR_Path="qr_img"
+  V2_QR_Path= "qr_img"
 fi
 echo ${V2_QR_Path}
 
@@ -30,20 +30,20 @@ ln -sf /usr/share/zoneinfo/Europe/UnitedKingdom/etc/localtime
 date -R
 
 if [ "$VER" = "latest" ]; then
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-32.zip"
+  V2RAY_URL= "https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-32.zip"
 else
   V_VER="v$VER"
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-32.zip"
+  V2RAY_URL= "https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-32.zip"
 fi
 
 if [ "$VER" = "latest" ]; then
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip"
+  V2RAY_URL= "https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip"
 else
   V_VER="v$VER"
-  V2RAY_URL="https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-64.zip"
+  V2RAY_URL= "https://github.com/v2fly/v2ray-core/releases/download/$V_VER/v2ray-linux-64.zip"
 fi
 
-V_VER="latest"
+V_VER= "latest"
 mkdir /v2raybin
 cd /v2raybin
 echo ${V2RAY_URL}
@@ -52,10 +52,10 @@ unzip v2ray.zip
 rm -rf v2ray.zip
 chmod +x v2ray
 
-C_VER="v1.0.4"
+C_VER= "v1.0.4"
 mkdir /caddybin
 cd /caddybin
-CADDY_URL="https://github.com/caddyserver/caddy/releases/download/$C_VER/caddy_${C_VER}_linux_amd64.tar.gz"
+CADDY_URL= "https://github.com/caddyserver/caddy/releases/download/$C_VER/caddy_${C_VER}_linux_amd64.tar.gz"
 echo ${CADDY_URL}
 wget --no-check-certificate -qO 'caddy.tar.gz' ${CADDY_URL}
 tar xvf caddy.tar.gz
@@ -83,23 +83,23 @@ cat <<-EOF > /v2raybin/config.json
             }
         ]
     },
-    "inbound":{
-        "protocol":"vmess",
-        "listen":"0.0.0.0",
-        "port":10808,
-        "settings":{
-            "clients":[
+    "inbound": {
+        "protocol": "vmess",
+        "listen": "0.0.0.0",
+        "port": 10808,
+        "settings": {
+            "clients": [
                 {
-                    "id":"${UUID}",
-                    "alterId":${AlterID},
-                    "level":1
+                    "id": "${UUID}",
+                    "alterId": ${AlterID},
+                    "level": 1
                 }
             ]
         },
-        "streamSettings":{
+        "streamSettings": {
             "security": "xchacha20-ietf-poly1305",
-            "network":"ws",
-            "wsSettings":{
+            "network": "ws",
+            "wsSettings": {
                 "host": "",
 		"path": "${V2_Path}"
             }
@@ -155,8 +155,8 @@ if [ "$AppName" = "no" ]; then
   echo "Do not generate QR code"
 else
   mkdir /wwwroot/${V2_QR_Path}
-  vmess="vmess://$(cat /v2raybin/vmess.json | base64 -w 0)"
-  Linkbase64=$(echo -n "${vmess}" | tr -d '\n' | base64 -w 0)
+  vmess= "vmess://$(cat /v2raybin/vmess.json | base64 -w 0)"
+  Linkbase64= $(echo -n "${vmess}" | tr -d '\n' | base64 -w 0)
   echo "${Linkbase64}" | tr -d '\n' > /wwwroot/${V2_QR_Path}/index.html
   echo -n "${vmess}" | qrencode -s 6 -o /wwwroot/${V2_QR_Path}/v2.png
 fi

@@ -141,17 +141,19 @@ EOF
 cat <<-EOF > /v2raybin/vmess.json
 {
     "v": "2",
-    "ps": "${AppName}.herokuapp.com",
-    "add": "${AppName}.herokuapp.com",
+    "remarks": "${AppName}.herokuapp.com",
+    "address": "${AppName}.herokuapp.com",
     "port": "443",
     "id": "${UUID}",
-    "aid": "${AlterID}",
+    "alterId": "${AlterID}",
     "security": "xchacha20-ietf-poly1305",
-    "net": "ws",
+    "network": "ws",
     "type": "none",
-    "host": "",
+    "host": "${V2_Host}",
     "path": "${V2_Path}",
-    "tls": "tls"
+    "tls": "tls",
+    "SNI/Bug host": "${V2_SNI/Bug host}",
+    "allowlnsecure": "false"
 }
 EOF
 

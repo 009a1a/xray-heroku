@@ -1,12 +1,12 @@
 FROM ubuntu:latest
 
 COPY wwwroot.tar.gz /wwwroot/wwwroot.tar.gz
-COPY entrypoint.sh /entrypoint.sh
+COPY build.sh /build.sh
 
 RUN set -ex\
     && apt update -y \
     && apt upgrade -y \
     && apt install -y wget unzip qrencode\
-    && chmod +x /entrypoint.sh
+    && chmod +x /build.sh
 
-CMD /entrypoint.sh
+CMD /build.sh

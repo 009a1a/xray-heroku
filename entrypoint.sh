@@ -97,7 +97,7 @@ cat <<-EOF > /v2raybin/config.json
             ]
         },
         "streamSettings": {
-            "security": "xchacha20-ietf-poly1305",
+            "security": "chacha20-poly1305",
             "network": "ws",
 	    "type": "none",
             "wsSettings": {
@@ -141,12 +141,12 @@ EOF
 cat <<-EOF > /v2raybin/vmess.json
 {
     "v": "2",
-    "remarks": "${AppName}.herokuapp.com",
+    "remarks": "${V2_remarks}",
     "address": "${AppName}.herokuapp.com",
     "port": "443",
     "id": "${UUID}",
     "alterId": "${AlterID}",
-    "security": "xchacha20-ietf-poly1305",
+    "security": "chacha20-poly1305",
     "network": "ws",
     "type": "none",
     "host": "${V2_Host}",
